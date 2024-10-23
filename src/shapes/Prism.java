@@ -7,7 +7,7 @@ package shapes;
  * 
  */
 public class Prism extends Shape {
-	private double side;
+	protected double side;
 	
 	public Prism (double height, double side) {
 		super(height);

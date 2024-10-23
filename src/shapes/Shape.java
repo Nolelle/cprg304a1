@@ -6,13 +6,16 @@ package shapes;
 /**
  * 
  */
-public class Shape implements Comparable<Shape> {
-	private double height;
+public abstract class Shape implements Comparable<Shape> {
+	//Member
+	protected double height;
 	
+	//Constructor
 	public Shape (double height) {
 		this.height = height;
 	}
 
+	// Getters and Setters
 	public double getHeight() {
 		return height;
 	}
@@ -21,10 +24,12 @@ public class Shape implements Comparable<Shape> {
 		this.height = height;
 	}
 	
+	// Abstract methods
 	public abstract double calcBaseArea;
 	public abstract double calcVolume;
 	
 	
+	// Override the compareTo method from the Comparable interface.
 	@Override
 	public int compareTo(Shape other) {
 		if (this.height > other.height) return 1;
