@@ -31,6 +31,4 @@ public class Shape implements Comparable<Shape> {
 		 else if (this.height < other.height) return -1;
 		return 0;
 	} 
-	
-
 }
