@@ -6,7 +6,7 @@ package shapes;
 /**
  * 
  */
-public class Prism extends Shape {
+public abstract class Prism extends Shape {
 	protected double side;
 	
 	public Prism (double height, double side) {
