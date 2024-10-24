@@ -4,32 +4,62 @@
 package shapes;
 
 /**
- * 
+ * Abstract base class for all 3D shapes
+ * Implements Comparable for default height comparison
  */
 public abstract class Shape implements Comparable<Shape> {
-	// Member
 	protected double height;
 
-	// Constructor
+	 /**
+     * Constructs a shape with the given height
+     * @param height the height of the shape (must be positive)
+     * @throws IllegalArgumentException if height is not positive
+     */
+
 	public Shape(double height) {
+		if (this.height < 0) {
+			throw new IllegalArgumentException("Height must be positive");
+		}
 		this.height = height;
 	}
 
-	// Getters and Setters
+	/**
+     * Get height of shape
+     * @return height of shape
+     */
 	public double getHeight() {
 		return height;
 	}
 
-	public void setHeight(double height) {
-		this.height = height;
-	}
+	/**
+     * Sets the height of the shape
+     * @param height the new height (must be positive)
+     * @throws IllegalArgumentException if height is not positive
+     */
+    public void setHeight(double height) {
+        if (height <= 0) {
+            throw new IllegalArgumentException("Height must be positive");
+        }
+        this.height = height;
+    }
 
-	// Abstract methods
+	  /**
+     * Calculate base area of shape
+     * @return base area
+     */
 	public abstract double calcBaseArea();
 
+	  /**
+     * Calculate volume of shape
+     * @return volume
+     */
 	public abstract double calcVolume();
 
-	// Override the compareTo method from the Comparable interface.
+	/**
+     * Compare shapes by height (natural ordering)
+     * @param other shape to compare with
+     * @return negative if this is less, positive if this is greater, 0 if equal
+     */
 	@Override
 	public int compareTo(Shape other) {
 		if (this.height > other.height) {
@@ -40,4 +70,13 @@ public abstract class Shape implements Comparable<Shape> {
 		return 0;
 	}
 
+	/**
+     * String representation of the shape
+     * @return string containing the shape type and its dimensions
+     */
+    @Override
+    public String toString() {
+        return String.format("%s {height=%.2f, baseArea=%.2f, volume=%.2f}", 
+            this.getClass().getSimpleName(), height, calcBaseArea(), calcVolume());
+    }
 }

@@ -12,7 +12,17 @@ import shapes.Shape;
  */
 public class ShapeSorter {
 	public static void bubbleSort(Shape[] shapes, Comparator<Shape> comparator) {
-		// To Do
+		int n = shapes.length;
+		
+		for (int i = 0; i < n; i++) {
+			for (int j = 1; j < n - 1- i; j++) {
+				if (comparator.compare(shapes[j], shapes[j + 1]) > 0) {
+					Shape temp = shapes[j];
+					shapes[j] = shapes[j + 1];
+					shapes[j + 1] =  temp;
+				}
+			}
+		}
 	}
 
 	public static void insertionSort(Shape[] shapes, Comparator<Shape> comparator) {
@@ -31,8 +41,7 @@ public class ShapeSorter {
 		// To Do
 	}
 
-	// Custom sort method
-	public static void customSort(Shape[] shape, Comparator<Shape> comparator) {
+	public static void heapSort(Shape[] shape, Comparator<Shape> comparator) {
 
 	}
 
