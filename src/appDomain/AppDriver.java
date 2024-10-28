@@ -175,20 +175,25 @@ public class AppDriver {
 	}
 
 	/**
-	 * Prints the sorted array of shapes. Displays each element with its index
-	 * number and shape details.
+	 * Prints the sorted array of shapes. Displays first element, every 1000th
+	 * element, and last element.
 	 * 
 	 * @param shapes array of sorted shapes to display
 	 */
 	private static void printResults(Shape[] shapes) {
-		if (shapes.length == 0) {
-			System.out.println("No shapes to display");
-			return;
+		System.out.println("\nSorted Results (Descending Order):");
+
+		// Print first element
+		System.out.println("Element 1: " + shapes[0]);
+
+		// Print every 100th element
+		for (int i = 99; i < shapes.length - 1; i += 100) {
+			System.out.println("Element " + (i + 1) + ": " + shapes[i]);
 		}
 
-		System.out.println("\nSorted Results (Descending Order):");
-		for (int i = 0; i < shapes.length; i++) {
-			System.out.println("Element " + (i + 1) + ": " + shapes[i]);
+		// Print last element if it wasn't already printed as a 100th element
+		if ((shapes.length - 1) % 100 != 99) {
+			System.out.println("Element " + shapes.length + ": " + shapes[shapes.length - 1]);
 		}
 	}
 }
