@@ -1,7 +1,6 @@
 package utilities;
 
 import java.util.Comparator;
-
 import shapes.Shape;
 
 /**
@@ -9,12 +8,21 @@ import shapes.Shape;
  * descending order comparison (larger to smaller)
  */
 public class AreaComparator implements Comparator<Shape> {
+
+	/**
+	 * Default constructor
+	 */
+	public AreaComparator() {
+		// Default constructor
+	}
+
 	/**
 	 * Compares two shapes by base area in descending order
-	 * 
+	 *
 	 * @param s1 the first shape
 	 * @param s2 the second shape
-	 * @return positive if s1 has smaller base area, negative if larger, 0 if equal
+	 * @return positive if s1 has smaller base area, negative if larger, 0
+	 * if equal
 	 */
 
 	@Override

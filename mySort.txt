@@ -1,0 +1,129 @@
+HEAP SORT ALGORITHM ANALYSIS
+=============================
+
+Algorithm Description:
+--------------------
+Heap Sort is a comparison-based sorting algorithm that uses a binary heap data structure. 
+The algorithm works by first building a max heap from the array and then repeatedly extracting 
+the maximum element and rebuilding the heap until all elements are sorted in descending order.
+
+Key Concepts:
+------------
+1. Binary Heap: A complete binary tree where parent nodes are greater than their children (max heap)
+2. Heapify: Process of converting a binary tree into a heap
+3. Root Extraction: Process of removing the root (maximum element) and restructuring the heap
+
+Algorithm Steps (Pseudocode):
+---------------------------
+```
+HeapSort(array A)
+{
+    // Phase 1: Build initial max heap
+    // Start from last non-leaf node (n/2 - 1) down to root (0)
+    for i = A.length/2 - 1 down to 0 {
+        Heapify(A, A.length, i)
+    }
+    
+    // Phase 2: Extract elements one by one
+    for i = A.length - 1 down to 1 {
+        // Move root (max) to end
+        swap A[0] with A[i]
+        // Rebuild heap with reduced size
+        Heapify(A, i, 0)
+    }
+}
+
+Heapify(array A, size n, index i)
+{
+    largest = i
+    leftChild = 2*i + 1
+    rightChild = 2*i + 2
+    
+    // Find largest among root, left child and right child
+    if leftChild < n and A[leftChild] > A[largest]
+        largest = leftChild
+    
+    if rightChild < n and A[rightChild] > A[largest]
+        largest = rightChild
+        
+    // If root is not largest, swap with largest and heapify the affected sub-tree
+    if largest ≠ i {
+        swap A[i] with A[largest]
+        Heapify(A, n, largest)
+    }
+}
+```
+
+Complexity Analysis:
+------------------
+1. Building Initial Max Heap (Phase 1):
+   - Starting from n/2 - 1 down to 0 (about n/2 nodes)
+   - Each Heapify operation in this phase:
+     * Comparisons: 2 (left and right child)
+     * Potential swap: 1
+     * Recursive call: 1
+   - Height of heap: log n
+   - Operations per node: O(log n)
+   - Total complexity for build phase: O(n log n)
+
+2. Extracting Elements (Phase 2):
+   - Performed n-1 times
+   - Each extraction:
+     * Swap operation: 1
+     * Heapify operation: O(log n)
+   - Total complexity for extraction phase: O(n log n)
+
+Overall Time Complexity:
+----------------------
+- Best Case: O(n log n)
+- Average Case: O(n log n)
+- Worst Case: O(n log n)
+
+Space Complexity:
+---------------
+- O(1) as sorting is done in-place
+- Recursive call stack space: O(log n) for heapify recursion
+
+Operation Count Analysis:
+----------------------
+For an array of size n:
+
+1. Build Heap Phase:
+   - Number of internal nodes to heapify: ⌊n/2⌋
+   - Comparisons per node: 2
+   - Potential swaps per node: 1
+   - Total operations: O(n)
+
+2. Extract Phase:
+   - Number of extractions: n-1
+   - Per extraction:
+     * Swap operations: 1
+     * Heapify comparisons: 2 log i (where i is current heap size)
+     * Potential swaps in heapify: log i
+   - Total operations: O(n log n)
+
+Advantages of Heap Sort:
+----------------------
+1. Consistent O(n log n) performance
+2. In-place sorting (minimal extra space)
+3. No quadratic worst case like Quicksort
+4. Works well with descending order requirement due to max heap property
+
+Disadvantages:
+-------------
+1. Not stable (equal elements may change relative order)
+2. Complex code structure compared to simpler algorithms
+3. Cache unfriendly due to non-sequential memory access
+
+Implementation Considerations:
+---------------------------
+1. Our implementation uses recursion in heapify, which could be converted to iteration
+2. The algorithm naturally produces ascending order with min heap or descending with max heap
+3. The entire sort can be done in-place, making it memory efficient
+
+Real-World Applications:
+----------------------
+1. Systems with memory constraints (in-place sorting)
+2. When consistent performance is required (guaranteed n log n)
+3. When implementing priority queues
+4. When dealing with partially sorted data

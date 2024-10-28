@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package shapes;
 
@@ -8,15 +8,18 @@ package shapes;
  * height comparison
  */
 public abstract class Shape implements Comparable<Shape> {
+
+	/**
+	 * The height of the shape
+	 */
 	protected double height;
 
 	/**
 	 * Constructs a shape with the given height
-	 * 
+	 *
 	 * @param height the height of the shape (must be positive)
 	 * @throws IllegalArgumentException if height is not positive
 	 */
-
 	public Shape(double height) {
 		if (height < 0) {
 			throw new IllegalArgumentException("Height must be positive");
@@ -26,7 +29,7 @@ public abstract class Shape implements Comparable<Shape> {
 
 	/**
 	 * Get height of shape
-	 * 
+	 *
 	 * @return height of shape
 	 */
 	public double getHeight() {
@@ -35,7 +38,7 @@ public abstract class Shape implements Comparable<Shape> {
 
 	/**
 	 * Sets the height of the shape
-	 * 
+	 *
 	 * @param height the new height (must be positive)
 	 * @throws IllegalArgumentException if height is not positive
 	 */
@@ -48,23 +51,24 @@ public abstract class Shape implements Comparable<Shape> {
 
 	/**
 	 * Calculate base area of shape
-	 * 
+	 *
 	 * @return base area
 	 */
 	public abstract double calcBaseArea();
 
 	/**
 	 * Calculate volume of shape
-	 * 
+	 *
 	 * @return volume
 	 */
 	public abstract double calcVolume();
 
 	/**
 	 * Compare shapes by height (natural ordering)
-	 * 
-	 * @param other shape to compare with
-	 * @return negative if this is less, positive if this is greater, 0 if equal
+	 *
+	 * @param s shape to compare with
+	 * @return negative if this is less, positive if this is greater, 0 if
+	 * equal
 	 */
 	@Override
 	public int compareTo(Shape s) {
@@ -79,12 +83,12 @@ public abstract class Shape implements Comparable<Shape> {
 
 	/**
 	 * String representation of the shape
-	 * 
+	 *
 	 * @return string containing the shape type and its dimensions
 	 */
 	@Override
 	public String toString() {
 		return String.format("%s {height=%.2f, baseArea=%.2f, volume=%.2f}", this.getClass().getSimpleName(), height,
-				calcBaseArea(), calcVolume());
+			calcBaseArea(), calcVolume());
 	}
 }
