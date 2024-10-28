@@ -18,7 +18,7 @@ public abstract class Shape implements Comparable<Shape> {
 	 */
 
 	public Shape(double height) {
-		if (this.height < 0) {
+		if (height < 0) {
 			throw new IllegalArgumentException("Height must be positive");
 		}
 		this.height = height;

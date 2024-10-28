@@ -144,7 +144,7 @@ public class ShapeSorter {
 		if (low < high) {
 			int pivotIndex = partition(shapes, low, high, comparator);
 			quickSort(shapes, low, pivotIndex - 1, comparator);
-			quickSort(shapes, high, pivotIndex - 1, comparator);
+			quickSort(shapes, pivotIndex + 1, high, comparator);
 		}
 	}
 
@@ -179,6 +179,7 @@ public class ShapeSorter {
 	public static void heapSort(Shape[] shapes, Comparator<Shape> comparator) {
 		int n = shapes.length;
 
+		// n / 2 - 1 is how we find the last non leaf node in a max heap.
 		for (int i = n / 2 - 1; i >= 0; i--) {
 			heapify(shapes, n, i, comparator);
 		}
@@ -187,11 +188,12 @@ public class ShapeSorter {
 			Shape temp = shapes[0];
 			shapes[0] = shapes[i];
 			shapes[i] = temp;
-			heapify(sahpes, i, 0, comparator);
+			heapify(shapes, i, 0, comparator);
 		}
 	}
 
 	private static void heapify(Shape[] shapes, int n, int i, Comparator<Shape> comparator) {
+		// Max Heap: largest value node is at the root of the tree.
 		int largest = i;
 		int left = 2 * i + 1;
 		int right = 2 * i + 2;
