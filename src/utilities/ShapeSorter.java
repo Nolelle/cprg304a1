@@ -2,8 +2,22 @@ package utilities;
 
 import java.util.Comparator;
 
+/**
+ * Generic sorting class that implements various sorting algorithms for arrays
+ * of Comparable objects. All sorts are implemented to sort in descending order.
+ * 
+ * @param <T> type that implements Comparable interface
+ */
 public class ShapeSorter<T extends Comparable<T>> {
 
+	/**
+	 * Bubble sort implementation. Repeatedly steps through the list, compares
+	 * adjacent elements and swaps them if they are in the wrong order. Time
+	 * Complexity: O(n²) Space Complexity: O(1)
+	 * 
+	 * @param shapes     array to be sorted
+	 * @param comparator comparator to determine ordering
+	 */
 	public void bubbleSort(T[] shapes, Comparator<T> comparator) {
 		int n = shapes.length;
 
@@ -17,6 +31,15 @@ public class ShapeSorter<T extends Comparable<T>> {
 			}
 		}
 	}
+
+	/**
+	 * Insertion sort implementation. Builds final sorted array one item at a time
+	 * by repeatedly taking next element and inserting it into its correct position.
+	 * Time Complexity: O(n²) Space Complexity: O(1)
+	 * 
+	 * @param shapes     array to be sorted
+	 * @param comparator comparator to determine ordering
+	 */
 
 	public void insertionSort(T[] shapes, Comparator<T> comparator) {
 		int n = shapes.length;
@@ -33,6 +56,14 @@ public class ShapeSorter<T extends Comparable<T>> {
 		}
 	}
 
+	/**
+	 * Selection sort implementation. Divides input into sorted and unsorted
+	 * regions, repeatedly finds minimum element from unsorted region and adds it to
+	 * sorted region. Time Complexity: O(n²) Space Complexity: O(1)
+	 * 
+	 * @param shapes     array to be sorted
+	 * @param comparator comparator to determine ordering
+	 */
 	public void selectionSort(T[] shapes, Comparator<T> comparator) {
 		int n = shapes.length;
 
@@ -53,6 +84,14 @@ public class ShapeSorter<T extends Comparable<T>> {
 		}
 	}
 
+	/**
+	 * Merge sort implementation. Divides input array into two halves, recursively
+	 * sorts them, then merges the sorted halves. Time Complexity: O(n log n) Space
+	 * Complexity: O(n)
+	 * 
+	 * @param shapes     array to be sorted
+	 * @param comparator comparator to determine ordering
+	 */
 	public void mergeSort(T[] shapes, Comparator<T> comparator) {
 		if (shapes.length < 2) {
 			return;
@@ -75,6 +114,15 @@ public class ShapeSorter<T extends Comparable<T>> {
 		merge(shapes, left, right, comparator);
 	}
 
+	/**
+	 * Helper method for merge sort. Merges two sorted arrays into a single sorted
+	 * array.
+	 * 
+	 * @param shapes     destination array
+	 * @param left       first sorted array
+	 * @param right      second sorted array
+	 * @param comparator comparator to determine ordering
+	 */
 	private void merge(T[] shapes, T[] left, T[] right, Comparator<T> comparator) {
 		int i = 0, j = 0, k = 0;
 		int leftLength = left.length;
@@ -104,18 +152,46 @@ public class ShapeSorter<T extends Comparable<T>> {
 		}
 	}
 
+	/**
+	 * Quick sort implementation. Selects a 'pivot' element and partitions other
+	 * elements into two sub-arrays according to whether they are less than or
+	 * greater than the pivot. Time Complexity: O(n log n) average case, O(n²) worst
+	 * case Space Complexity: O(log n)
+	 * 
+	 * @param shapes     array to be sorted
+	 * @param comparator comparator to determine ordering
+	 */
 	public void quickSort(T[] shapes, Comparator<T> comparator) {
-		quickSort(shapes, 0, shapes.length - 1, comparator);
+		quickSortRecursive(shapes, 0, shapes.length - 1, comparator);
 	}
 
-	private void quickSort(T[] shapes, int low, int high, Comparator<T> comparator) {
+	/**
+	 * Recursive helper method for quick sort.
+	 * 
+	 * @param shapes     array to be sorted
+	 * @param low        starting index of the subarray
+	 * @param high       ending index of the subarray
+	 * @param comparator comparator to determine ordering
+	 */
+	private void quickSortRecursive(T[] shapes, int low, int high, Comparator<T> comparator) {
 		if (low < high) {
 			int pivotIndex = partition(shapes, low, high, comparator);
-			quickSort(shapes, low, pivotIndex - 1, comparator);
-			quickSort(shapes, pivotIndex + 1, high, comparator);
+			quickSortRecursive(shapes, low, pivotIndex - 1, comparator);
+			quickSortRecursive(shapes, pivotIndex + 1, high, comparator);
 		}
 	}
 
+	/**
+	 * Helper method for quick sort that partitions the array. Places pivot at its
+	 * correct position in sorted array and places all smaller elements to left of
+	 * pivot, and all greater elements to right of pivot.
+	 * 
+	 * @param shapes     array to be partitioned
+	 * @param low        starting index of the subarray
+	 * @param high       ending index of the subarray
+	 * @param comparator comparator to determine ordering
+	 * @return the partitioning index
+	 */
 	private int partition(T[] shapes, int low, int high, Comparator<T> comparator) {
 		T pivot = shapes[high];
 		int i = low - 1;
@@ -135,6 +211,14 @@ public class ShapeSorter<T extends Comparable<T>> {
 		return i + 1;
 	}
 
+	/**
+	 * Heap sort implementation. Creates a max heap of the array and repeatedly
+	 * extracts the maximum element. Time Complexity: O(n log n) Space Complexity:
+	 * O(1)
+	 * 
+	 * @param shapes     array to be sorted
+	 * @param comparator comparator to determine ordering
+	 */
 	public void heapSort(T[] shapes, Comparator<T> comparator) {
 		int n = shapes.length;
 
@@ -150,6 +234,15 @@ public class ShapeSorter<T extends Comparable<T>> {
 		}
 	}
 
+	/**
+	 * Helper method for heap sort that heapifies a subtree rooted with node i.
+	 * Assumes that the subtrees are already heapified.
+	 * 
+	 * @param shapes     array representing heap
+	 * @param n          size of heap
+	 * @param i          root node of subtree
+	 * @param comparator comparator to determine ordering
+	 */
 	private void heapify(T[] shapes, int n, int i, Comparator<T> comparator) {
 		int largest = i;
 		int left = 2 * i + 1;

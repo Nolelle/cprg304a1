@@ -17,11 +17,25 @@ import utilities.AreaComparator;
 import utilities.ShapeSorter;
 import utilities.VolumeComparator;
 
+/**
+ * Main driver class for the shape sorting application. Reads shapes from a file
+ * and sorts them using various algorithms and comparison criteria.
+ * 
+ */
 public class AppDriver {
 	private static String filename;
 	private static char compareType;
 	private static char sortType;
 
+	/**
+	 * Main method that processes command line arguments and executes the sorting
+	 * operation. Accepts three command line arguments: -f filename: the input file
+	 * containing shape data -t [h|v|a]: comparison type (height, volume, or area)
+	 * -s [b|s|i|m|q|z]: sort algorithm (bubble, selection, insertion, merge, quick,
+	 * or heap)
+	 * 
+	 * @param args command line arguments
+	 */
 	public static void main(String[] args) {
 		if (!parseArgs(args)) {
 			System.exit(1);
@@ -67,6 +81,12 @@ public class AppDriver {
 		}
 	}
 
+	/**
+	 * Parses and validates command line arguments.
+	 * 
+	 * @param args command line arguments to parse
+	 * @return true if arguments are valid, false otherwise
+	 */
 	private static boolean parseArgs(String[] args) {
 		if (args.length != 3) {
 			System.err.println("Error: Exactly three arguments are required");
@@ -115,6 +135,17 @@ public class AppDriver {
 		return true;
 	}
 
+	/**
+	 * Reads shapes from the input file and creates corresponding Shape objects. The
+	 * first line of the file should contain the number of shapes. Each subsequent
+	 * line should contain: shape_type height dimension where dimension is either
+	 * radius (for Cylinder/Cone) or side length (for Prisms/Pyramid)
+	 * 
+	 * @return array of Shape objects read from the file
+	 * @throws FileNotFoundException    if the input file cannot be found
+	 * @throws IllegalArgumentException if the shape type is invalid or data is
+	 *                                  malformed
+	 */
 	private static Shape[] readShapesFromFile() throws FileNotFoundException {
 		File file = new File(filename);
 		Scanner scanner = new Scanner(file);
@@ -143,6 +174,12 @@ public class AppDriver {
 		return shapes;
 	}
 
+	/**
+	 * Prints the sorted array of shapes. Displays each element with its index
+	 * number and shape details.
+	 * 
+	 * @param shapes array of sorted shapes to display
+	 */
 	private static void printResults(Shape[] shapes) {
 		if (shapes.length == 0) {
 			System.out.println("No shapes to display");
